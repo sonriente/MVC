@@ -1,0 +1,21 @@
+<h3>Film List:</h3><br>
+
+<table class="table table-striped" style="width: 600px;">
+    <?php foreach ($data['films'] as $film) { ?>
+        <tr>
+            <td><b><?=$film['title']?></b></td>
+            <td align="right">
+                <a href="/admin/films/view/<?= $film['id'] ?>"><button class="btn btn-sm btn-info">About</button></a>
+                <a href="/admin/films/edit/<?= $film['id'] ?>"><button class="btn btn-sm btn-primary">Edit</button></a>
+                <a href="/admin/films/delete/<?= $film['id'] ?>" onclick="return confirmDelete();"><button class="btn btn-sm btn-warning">Delete</button></a>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+<br>
+
+<div>
+    <a href="/admin/films/add/"><button class="btn btn-sm btn-success">New Film</button></a>
+    <a href="/admin/films/addfromfile/"><button class="btn btn-sm btn-success">Load From File</button></a>
+</div>

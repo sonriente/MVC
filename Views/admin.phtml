@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?=Config::get('site_name')?></title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="/js/admin.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <?php if (Session::get('login')) { ?>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><?=Config::get('site_name')?> - GOD LEVEL</a>
+            <ul class="nav navbar-nav">
+                <li><a <?php if (App::getRouter()->getController() == 'films') { ?>class="active"<?php } ?> href="/admin/films/">Films</a></li>
+                <li><a href="/admin/users/logout">Logout</a></li>
+            </ul>
+        </div>
+        <?php } else { ?>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><?=Config::get('site_name')?></a>
+            <ul class="nav navbar-nav">
+                <li><a <?php if (App::getRouter()->getController() == 'films') { ?>class="active"<?php } ?> href="/films/">Films</a></li>
+                <li><a href="/admin/users/login">Login (God Level)</a></li>
+            </ul>
+        </div>
+        <?php } ?>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <form action="/admin/search/" class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search for...">
+                </div>
+                <button type="submit" class="btn btn-success">Go!</button>
+                <div class="radio" style="color: #DADADA;">
+                    <label>
+                        <input type="radio" name="param" value="title" checked>
+                        Search only in films
+                    </label>
+                    <label>
+                        <input type="radio" name="param" value="actors">
+                        Search only in actors
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+
+        <?php if (Session::hasFlash()) { ?>
+            <div class="alert alert-info" role="alert">
+                <?php Session::Flash(); ?>
+            </div>
+        <?php } ?>
+
+        <?=$data['content']?>
+    </div>
+
+</div>
+
+</body>
+</html>
